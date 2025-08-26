@@ -24,5 +24,7 @@ public class ModItems {
 
         return item;
     }
-
+    public static void initialise() {
+    }
+    public static final Item SNOWFLAKE = register("snowflake", Item::new, new Item.Settings());
 }

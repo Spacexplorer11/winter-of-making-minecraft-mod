@@ -2,8 +2,11 @@ package singh.akaalroop.winter_of_making;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.minecraft.item.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static net.minecraft.item.Items.register;
 
 public class WinterOfMaking implements ModInitializer {
 	public static final String MOD_ID = "winter-of-making";
@@ -19,6 +22,7 @@ public class WinterOfMaking implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
-		LOGGER.info("Hello Fabric world!");
+		LOGGER.info("The winter is yours for the making");
+        ModItems.initialise();
 	}
 }
