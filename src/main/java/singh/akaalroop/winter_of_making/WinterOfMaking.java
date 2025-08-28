@@ -1,12 +1,13 @@
 package singh.akaalroop.winter_of_making;
 
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.fabricmc.api.ModInitializer;
 
-import net.minecraft.item.Item;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.server.command.CommandManager;
+import net.minecraft.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static net.minecraft.item.Items.register;
 
 public class WinterOfMaking implements ModInitializer {
 	public static final String MOD_ID = "winter-of-making";
@@ -24,5 +25,22 @@ public class WinterOfMaking implements ModInitializer {
 
 		LOGGER.info("The winter is yours for the making");
         ModItems.initialise();
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(CommandManager.literal("wom-shop")
+                .executes(context -> {
+                    context.getSource().sendFeedback(() -> Text.literal("""
+                    The available Winter of Making shop items are:
+                    -------------------------
+                    1. Hot Cocoa (Saturation for 2 hours) - 20 snowflakes
+                    2. Snow Block (snow block + iron block) - 25 snowflakes
+                    3. Become Snow Queen (sends message that you are snow queen) - 30 snowflakes
+                    4. Become Snow King (sends message that you are snow king) - 30 snowflakes
+                    5. Snowballs (Get given 2048 snowballs) - 200 snowflakes
+                    6. Snow golem overlord (Spawn 25 snow golems at your position) - 300 snowflakes
+                    7. Snowy! (Change the weather to rainy + teleport you & 5 random players to the nearest snowy biome to you) - 500 snowflakes
+                    8. SNOW BOMB! (Spawn 10 snowballs 2 blocks above everyone's head!) - 1000 snowflakes!"""), false);
+                    return 1;
+                })
+                .then(CommandManager.argument("shopItem", IntegerArgumentType.integer())
+                        .executes(ShopHandling::buyShopItem))));
 	}
 }
