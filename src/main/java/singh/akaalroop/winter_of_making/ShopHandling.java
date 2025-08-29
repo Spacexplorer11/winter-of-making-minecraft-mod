@@ -2,8 +2,16 @@ package singh.akaalroop.winter_of_making;
 
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
+
+import java.util.Objects;
+import java.util.function.Predicate;
+
+import static singh.akaalroop.winter_of_making.ModItems.SNOWFLAKE;
 
 public class ShopHandling {
     public static int buyShopItem(CommandContext<ServerCommandSource> context) {
@@ -41,6 +49,17 @@ public class ShopHandling {
     }
 
     static int hotCocoa(CommandContext<ServerCommandSource> context) {
+        int snowflakes = Objects.requireNonNull(context.getSource().getPlayer()).getInventory().count(SNOWFLAKE);
+        int slot = context.getSource().getPlayer().getInventory().getSlotWithStack(SNOWFLAKE.getDefaultStack());
+        if (snowflakes >= 20) {
+            var effect = new StatusEffectInstance(StatusEffects.SATURATION, 7200 * 20, 0, false, true, true);
+            Objects.requireNonNull(context.getSource().getPlayer()).addStatusEffect(effect);
+            context.getSource().sendFeedback(() -> Text.literal("You successfully bought Hot Cocoa for 20 snowflakes!"), false);
+            context.getSource().getPlayer().getInventory().removeStack(slot, 20);
+        }
+        else {
+            context.getSource().sendFeedback(() -> Text.literal("You do not have enough snowflakes to buy Hot Cocoa for 20 snowflakes! (Snowflakes must be in your inventory to purchase)"), false);
+        }
         return 1;
     }
 
