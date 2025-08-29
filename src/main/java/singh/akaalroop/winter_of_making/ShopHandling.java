@@ -92,7 +92,7 @@ public class ShopHandling {
         if (snowflakes >= 25) {
             Objects.requireNonNull(context.getSource().getPlayer()).getInventory().insertStack(Registries.ITEM.get(Identifier.of("minecraft", "snow_block")).getDefaultStack());
             Objects.requireNonNull(context.getSource().getPlayer()).getInventory().insertStack(Registries.ITEM.get(Identifier.of("minecraft", "iron_block")).getDefaultStack());
-            context.getSource().sendFeedback(() -> Text.literal("You successfully bought snowBlock for 25 snowflakes!"), false);
+            context.getSource().sendFeedback(() -> Text.literal("You successfully bought Snow Block for 25 snowflakes!"), false);
             removeSnowflakes(context.getSource().getPlayer(),25);
         }
         else {
