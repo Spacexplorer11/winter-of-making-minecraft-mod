@@ -4,7 +4,6 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.command.ServerCommandSource;
@@ -97,7 +96,7 @@ public class ShopHandling {
             removeSnowflakes(context.getSource().getPlayer(),25);
         }
         else {
-            context.getSource().sendFeedback(() -> Text.literal("You do not have enough snowflakes to buy Hot Cocoa for 20 snowflakes! (Snowflakes must be in your inventory to purchase)"), false);
+            context.getSource().sendFeedback(() -> Text.literal("You do not have enough snowflakes to buy Snow Block for 25 snowflakes! (Snowflakes must be in your inventory to purchase)"), false);
         }
         return 1;
     }
