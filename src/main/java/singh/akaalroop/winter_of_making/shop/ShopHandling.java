@@ -3,13 +3,16 @@ package singh.akaalroop.winter_of_making.shop;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -142,6 +145,24 @@ public class ShopHandling {
     }
 
     static int snowGolemOverlord(CommandContext<ServerCommandSource> context, int snowflakes) {
+        if (snowflakes >= 300) {
+            ServerWorld world = Objects.requireNonNull(context.getSource().getPlayer()).getWorld();
+            for (int i = 0; i < 25; i++) {
+                SnowGolemEntity snowGolem = new SnowGolemEntity(EntityType.SNOW_GOLEM, world);
+                snowGolem.refreshPositionAndAngles(
+                        context.getSource().getPlayer().getX(),
+                        context.getSource().getPlayer().getY(),
+                        context.getSource().getPlayer().getZ(),
+                        0.0F,
+                        0.0F
+                );
+                Objects.requireNonNull(context.getSource().getServer().getWorld(world.getRegistryKey())).spawnEntity(snowGolem);
+            }
+            context.getSource().sendFeedback(() -> Text.literal("You successfully bought Snow Golem Overlord for 300 snowflakes!").formatted(Formatting.DARK_GREEN), false);
+            removeSnowflakes(Objects.requireNonNull(context.getSource().getPlayer()), 300);
+        } else {
+            context.getSource().sendFeedback(() -> Text.literal("You do not have enough snowflakes to buy Snow Golem Overlord for 300 snowflakes! (Snowflakes must be in your inventory to purchase)").formatted(Formatting.RED), false);
+        }
         return 1;
     }
 
