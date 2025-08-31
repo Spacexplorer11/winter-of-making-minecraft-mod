@@ -9,6 +9,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
 import java.util.Objects;
@@ -79,11 +80,11 @@ public class ShopHandling {
         if (snowflakes >= 20) {
             var effect = new StatusEffectInstance(StatusEffects.SATURATION, 7200 * 20, 0, false, true, true);
             Objects.requireNonNull(context.getSource().getPlayer()).addStatusEffect(effect);
-            context.getSource().sendFeedback(() -> Text.literal("You successfully bought Hot Cocoa for 20 snowflakes!"), false);
+            context.getSource().sendFeedback(() -> Text.literal("You successfully bought Hot Cocoa for 20 snowflakes!").formatted(Formatting.DARK_GREEN), false);
             removeSnowflakes(context.getSource().getPlayer(),20);
         }
         else {
-            context.getSource().sendFeedback(() -> Text.literal("You do not have enough snowflakes to buy Hot Cocoa for 20 snowflakes! (Snowflakes must be in your inventory to purchase)"), false);
+            context.getSource().sendFeedback(() -> Text.literal("You do not have enough snowflakes to buy Hot Cocoa for 20 snowflakes! (Snowflakes must be in your inventory to purchase)").formatted(Formatting.RED), false);
         }
         return 1;
     }
@@ -92,20 +93,40 @@ public class ShopHandling {
         if (snowflakes >= 25) {
             Objects.requireNonNull(context.getSource().getPlayer()).getInventory().insertStack(Registries.ITEM.get(Identifier.of("minecraft", "snow_block")).getDefaultStack());
             Objects.requireNonNull(context.getSource().getPlayer()).getInventory().insertStack(Registries.ITEM.get(Identifier.of("minecraft", "iron_block")).getDefaultStack());
-            context.getSource().sendFeedback(() -> Text.literal("You successfully bought Snow Block for 25 snowflakes!"), false);
+            context.getSource().sendFeedback(() -> Text.literal("You successfully bought Snow Block for 25 snowflakes!").formatted(Formatting.DARK_GREEN), false);
             removeSnowflakes(context.getSource().getPlayer(),25);
         }
         else {
-            context.getSource().sendFeedback(() -> Text.literal("You do not have enough snowflakes to buy Snow Block for 25 snowflakes! (Snowflakes must be in your inventory to purchase)"), false);
+            context.getSource().sendFeedback(() -> Text.literal("You do not have enough snowflakes to buy Snow Block for 25 snowflakes! (Snowflakes must be in your inventory to purchase)").formatted(Formatting.RED), false);
         }
         return 1;
     }
 
     static int snowQueen(CommandContext<ServerCommandSource> context, int snowflakes) {
+        if (snowflakes >= 30) {
+            context.getSource().getServer().getPlayerManager()
+                    .broadcast(Text.literal("[Official Server Announcement] ")
+                            .formatted(Formatting.GOLD).append(Objects.requireNonNull(Objects.requireNonNull(context.getSource().getPlayer()).getDisplayName())).append(Text.literal(" is a Snow Queen, slayyyy ~ :3").formatted(Formatting.LIGHT_PURPLE)), false);
+            context.getSource().sendFeedback(() -> Text.literal("You successfully bought Snow Queen for 30 snowflakes!").formatted(Formatting.DARK_GREEN), false);
+            removeSnowflakes(Objects.requireNonNull(context.getSource().getPlayer()),30);
+        }
+        else {
+            context.getSource().sendFeedback(() -> Text.literal("You do not have enough snowflakes to buy Snow Queen for 30 snowflakes! (Snowflakes must be in your inventory to purchase)").formatted(Formatting.RED), false);
+        }
         return 1;
     }
 
     static int snowKing(CommandContext<ServerCommandSource> context, int snowflakes) {
+        if (snowflakes >= 30) {
+            context.getSource().getServer().getPlayerManager()
+                    .broadcast(Text.literal("[Official Server Announcement] ")
+                            .formatted(Formatting.GOLD).append(Objects.requireNonNull(Objects.requireNonNull(context.getSource().getPlayer()).getDisplayName())).append(Text.literal(" is a Snow King, bow down to him :o").formatted(Formatting.GREEN)), false);
+            context.getSource().sendFeedback(() -> Text.literal("You successfully bought Snow King for 30 snowflakes!").formatted(Formatting.DARK_GREEN), false);
+            removeSnowflakes(Objects.requireNonNull(context.getSource().getPlayer()),30);
+        }
+        else {
+            context.getSource().sendFeedback(() -> Text.literal("You do not have enough snowflakes to buy Snow King for 30 snowflakes! (Snowflakes must be in your inventory to purchase)").formatted(Formatting.RED), false);
+        }
         return 1;
     }
 
