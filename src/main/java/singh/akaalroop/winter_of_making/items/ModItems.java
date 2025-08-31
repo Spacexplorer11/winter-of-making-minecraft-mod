@@ -1,4 +1,4 @@
-package singh.akaalroop.winter_of_making;
+package singh.akaalroop.winter_of_making.items;
 
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -21,7 +21,9 @@ public class ModItems {
 
         return item;
     }
+
     public static void initialise() {
     }
+
     public static final Item SNOWFLAKE = register("snowflake", Item::new, new Item.Settings());
 }

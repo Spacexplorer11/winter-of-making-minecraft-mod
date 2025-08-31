@@ -1,44 +1,44 @@
 {
-	"schemaVersion": 1,
-	"id": "winter-of-making",
-	"version": "${version}",
-	"name": "Winter Of Making",
-	"description": "An economy mod based on Summer of Making by Hackclub but renamed because I dont wanna get sued or smth",
-	"authors": [
-		"Akaalroop Singh"
-	],
-	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/Spacexplorer11/winter-of-making-minecraft-mod"
-	},
-	"license": "AGPL-3.0",
-	"icon": "assets/winter-of-making/icon.png",
-    "environment": "*",
-    "entrypoints": {
-      "main": [
-        "singh.akaalroop.winter_of_making.WinterOfMaking"
-      ],
-      "client": [
-        "singh.akaalroop.winter_of_making.WinterOfMakingClient"
-      ],
-      "fabric-datagen": [
-        "singh.akaalroop.winter_of_making.WinterOfMakingDataGenerator"
-      ]
-    },
-    "mixins": [
-      "winter-of-making.mixins.json",
-      {
-        "config": "winter-of-making.client.mixins.json",
-        "environment": "client"
-      }
+  "schemaVersion": 1,
+  "id": "winter-of-making",
+  "version": "${version}",
+  "name": "Winter Of Making",
+  "description": "An economy mod based on Summer of Making by Hackclub but renamed because I dont wanna get sued or smth",
+  "authors": [
+    "Akaalroop Singh"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/Spacexplorer11/winter-of-making-minecraft-mod"
+  },
+  "license": "AGPL-3.0",
+  "icon": "assets/winter-of-making/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "singh.akaalroop.winter_of_making.WinterOfMaking"
     ],
-    "depends": {
-      "fabricloader": ">=0.17.2",
-      "minecraft": "~1.21.8",
-      "java": ">=21",
-      "fabric-api": "*"
-    },
-    "suggests": {
-      "another-mod": "*"
+    "client": [
+      "singh.akaalroop.winter_of_making.WinterOfMakingClient"
+    ],
+    "fabric-datagen": [
+      "singh.akaalroop.winter_of_making.WinterOfMakingDataGenerator"
+    ]
+  },
+  "mixins": [
+    "winter-of-making.mixins.json",
+    {
+      "config": "winter-of-making.client.mixins.json",
+      "environment": "client"
     }
+  ],
+  "depends": {
+    "fabricloader": ">=0.17.2",
+    "minecraft": "~1.21.8",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
 }

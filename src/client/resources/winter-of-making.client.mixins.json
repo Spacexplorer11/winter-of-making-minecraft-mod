@@ -1,9 +1,9 @@
 {
-	"required": true,
-	"package": "singh.akaalroop.winter_of_making.mixin.client",
-	"compatibilityLevel": "JAVA_21",
-	"client": [],
-	"injectors": {
-		"defaultRequire": 1
-	}
+  "required": true,
+  "package": "singh.akaalroop.winter_of_making.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }
