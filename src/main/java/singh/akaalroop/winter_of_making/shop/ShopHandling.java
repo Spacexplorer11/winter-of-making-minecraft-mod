@@ -1,10 +1,12 @@
-package singh.akaalroop.winter_of_making;
+package singh.akaalroop.winter_of_making.shop;
 
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -14,10 +16,10 @@ import net.minecraft.util.Identifier;
 
 import java.util.Objects;
 
-import static singh.akaalroop.winter_of_making.ModItems.SNOWFLAKE;
+import static singh.akaalroop.winter_of_making.items.ModItems.SNOWFLAKE;
 
 public class ShopHandling {
-    public static int buyShopItem(CommandContext<ServerCommandSource> context) {
+    public static int buyShopItem(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         int shopItem = IntegerArgumentType.getInteger(context, "shopItem");
         int snowflakes = Objects.requireNonNull(context.getSource().getPlayer()).getInventory().count(SNOWFLAKE);
         switch (shopItem) {
@@ -81,9 +83,8 @@ public class ShopHandling {
             var effect = new StatusEffectInstance(StatusEffects.SATURATION, 7200 * 20, 0, false, true, true);
             Objects.requireNonNull(context.getSource().getPlayer()).addStatusEffect(effect);
             context.getSource().sendFeedback(() -> Text.literal("You successfully bought Hot Cocoa for 20 snowflakes!").formatted(Formatting.DARK_GREEN), false);
-            removeSnowflakes(context.getSource().getPlayer(),20);
-        }
-        else {
+            removeSnowflakes(context.getSource().getPlayer(), 20);
+        } else {
             context.getSource().sendFeedback(() -> Text.literal("You do not have enough snowflakes to buy Hot Cocoa for 20 snowflakes! (Snowflakes must be in your inventory to purchase)").formatted(Formatting.RED), false);
         }
         return 1;
@@ -94,9 +95,8 @@ public class ShopHandling {
             Objects.requireNonNull(context.getSource().getPlayer()).getInventory().insertStack(Registries.ITEM.get(Identifier.of("minecraft", "snow_block")).getDefaultStack());
             Objects.requireNonNull(context.getSource().getPlayer()).getInventory().insertStack(Registries.ITEM.get(Identifier.of("minecraft", "iron_block")).getDefaultStack());
             context.getSource().sendFeedback(() -> Text.literal("You successfully bought Snow Block for 25 snowflakes!").formatted(Formatting.DARK_GREEN), false);
-            removeSnowflakes(context.getSource().getPlayer(),25);
-        }
-        else {
+            removeSnowflakes(context.getSource().getPlayer(), 25);
+        } else {
             context.getSource().sendFeedback(() -> Text.literal("You do not have enough snowflakes to buy Snow Block for 25 snowflakes! (Snowflakes must be in your inventory to purchase)").formatted(Formatting.RED), false);
         }
         return 1;
@@ -108,9 +108,8 @@ public class ShopHandling {
                     .broadcast(Text.literal("[Official Server Announcement] ")
                             .formatted(Formatting.GOLD).append(Objects.requireNonNull(Objects.requireNonNull(context.getSource().getPlayer()).getDisplayName())).append(Text.literal(" is a Snow Queen, slayyyy ~ :3").formatted(Formatting.LIGHT_PURPLE)), false);
             context.getSource().sendFeedback(() -> Text.literal("You successfully bought Snow Queen for 30 snowflakes!").formatted(Formatting.DARK_GREEN), false);
-            removeSnowflakes(Objects.requireNonNull(context.getSource().getPlayer()),30);
-        }
-        else {
+            removeSnowflakes(Objects.requireNonNull(context.getSource().getPlayer()), 30);
+        } else {
             context.getSource().sendFeedback(() -> Text.literal("You do not have enough snowflakes to buy Snow Queen for 30 snowflakes! (Snowflakes must be in your inventory to purchase)").formatted(Formatting.RED), false);
         }
         return 1;
@@ -122,15 +121,23 @@ public class ShopHandling {
                     .broadcast(Text.literal("[Official Server Announcement] ")
                             .formatted(Formatting.GOLD).append(Objects.requireNonNull(Objects.requireNonNull(context.getSource().getPlayer()).getDisplayName())).append(Text.literal(" is a Snow King, bow down to him :o").formatted(Formatting.GREEN)), false);
             context.getSource().sendFeedback(() -> Text.literal("You successfully bought Snow King for 30 snowflakes!").formatted(Formatting.DARK_GREEN), false);
-            removeSnowflakes(Objects.requireNonNull(context.getSource().getPlayer()),30);
-        }
-        else {
+            removeSnowflakes(Objects.requireNonNull(context.getSource().getPlayer()), 30);
+        } else {
             context.getSource().sendFeedback(() -> Text.literal("You do not have enough snowflakes to buy Snow King for 30 snowflakes! (Snowflakes must be in your inventory to purchase)").formatted(Formatting.RED), false);
         }
         return 1;
     }
 
     static int snowballs(CommandContext<ServerCommandSource> context, int snowflakes) {
+        if (snowflakes >= 200) {
+            ItemStack snowballs = new ItemStack(Items.SNOWBALL, 2048);
+            Objects.requireNonNull(context.getSource().getPlayer()).giveItemStack(snowballs);
+            Objects.requireNonNull(context.getSource().getPlayer()).dropItem(snowballs, false);
+            context.getSource().sendFeedback(() -> Text.literal("You successfully bought Snowballs for 200 snowflakes!").formatted(Formatting.DARK_GREEN), false);
+            removeSnowflakes(Objects.requireNonNull(context.getSource().getPlayer()), 200);
+        } else {
+            context.getSource().sendFeedback(() -> Text.literal("You do not have enough snowflakes to buy Snowballs for 200 snowflakes! (Snowflakes must be in your inventory to purchase)").formatted(Formatting.RED), false);
+        }
         return 1;
     }
 
