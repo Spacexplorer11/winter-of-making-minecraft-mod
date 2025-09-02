@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.SnowGolemEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
@@ -58,16 +59,16 @@ public class ShopHandling {
     }
 
     static void removeSnowflakes(ServerPlayerEntity player, int amountToRemove) {
-        var inv = player.getInventory();
+        PlayerInventory inventory = player.getInventory();
 
-        for (int i = 0; i < inv.size(); i++) {
-            ItemStack stack = inv.getStack(i);
+        for (int i = 0; i < inventory.size(); i++) {
+            ItemStack stack = inventory.getStack(i);
 
             if (!stack.isEmpty() && stack.isOf(SNOWFLAKE)) {
                 int countInStack = stack.getCount();
 
                 if (amountToRemove >= countInStack) {
-                    inv.setStack(i, ItemStack.EMPTY);
+                    inventory.setStack(i, ItemStack.EMPTY);
                     amountToRemove -= countInStack;
                 } else {
                     stack.decrement(amountToRemove);
@@ -83,7 +84,7 @@ public class ShopHandling {
 
     static int hotCocoa(CommandContext<ServerCommandSource> context, int snowflakes) {
         if (snowflakes >= 20) {
-            var effect = new StatusEffectInstance(StatusEffects.SATURATION, 7200 * 20, 0, false, true, true);
+            StatusEffectInstance effect = new StatusEffectInstance(StatusEffects.SATURATION, 7200 * 20, 0, false, true, true);
             Objects.requireNonNull(context.getSource().getPlayer()).addStatusEffect(effect);
             context.getSource().sendFeedback(() -> Text.literal("You successfully bought Hot Cocoa for 20 snowflakes!").formatted(Formatting.DARK_GREEN), false);
             removeSnowflakes(context.getSource().getPlayer(), 20);
