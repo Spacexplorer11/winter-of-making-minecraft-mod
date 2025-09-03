@@ -2,7 +2,6 @@ package singh.akaalroop.winter_of_making.shop;
 
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -17,13 +16,20 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.biome.BiomeKeys;
+import org.slf4j.event.Level;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
+import static singh.akaalroop.winter_of_making.WinterOfMaking.LOGGER;
 import static singh.akaalroop.winter_of_making.items.ModItems.SNOWFLAKE;
 
 public class ShopHandling {
-    public static int buyShopItem(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+    public static int buyShopItem(CommandContext<ServerCommandSource> context) {
         int shopItem = IntegerArgumentType.getInteger(context, "shopItem");
         int snowflakes = Objects.requireNonNull(context.getSource().getPlayer()).getInventory().count(SNOWFLAKE);
         switch (shopItem) {
@@ -168,6 +174,56 @@ public class ShopHandling {
     }
 
     static int snowy(CommandContext<ServerCommandSource> context, int snowflakes) {
+        if (snowflakes >= 500) {
+            try {
+                List<ServerPlayerEntity> players = context.getSource().getServer().getPlayerManager().getPlayerList();
+                int limit = Math.min(players.size(), 5);
+                List<ServerPlayerEntity> playersToTeleport = new ArrayList<>(players.subList(0, limit));
+                if (players.size() > 1) {
+                    playersToTeleport.add(context.getSource().getPlayer());
+                }
+                ServerWorld world = context.getSource().getWorld();
+                BlockPos playerPos = Objects.requireNonNull(context.getSource().getPlayer()).getBlockPos();
+                LOGGER.info("Player who bought snowy position: {}", playerPos);
+
+                var result = world.locateBiome(biome -> biome.matchesKey(BiomeKeys.ICE_SPIKES) || biome.matchesKey(BiomeKeys.SNOWY_PLAINS) || biome.matchesKey(BiomeKeys.SNOWY_BEACH) || biome.matchesKey(BiomeKeys.SNOWY_SLOPES) || biome.matchesKey(BiomeKeys.SNOWY_TAIGA), playerPos, 12801, 20, 20);
+                if (result == null) {
+                    context.getSource().sendError(Text.literal("No snowy biome found nearby!"));
+                    return 0;
+                }
+                var biomePos = result.getFirst();
+                LOGGER.info("Nearest biome position: {}", biomePos);
+
+                while (world.getBlockState(biomePos).isSolidBlock(world, biomePos)) {
+                    biomePos = biomePos.up();
+                    LOGGER.info("The biome pos was in a solid block, it's now: {}", biomePos);
+                }
+
+                world.setWeather(0, 3000, true, false);
+
+                for (ServerPlayerEntity player : playersToTeleport) {
+                    player.teleport(world,
+                            biomePos.getX() + 0.5,
+                            biomePos.getY() + 1.0,
+                            biomePos.getZ() + 0.5,
+                            Set.of(),
+                            player.getYaw(),
+                            player.getPitch(),
+                            false
+                    );
+                }
+
+                context.getSource().sendFeedback(() -> Text.literal("You successfully bought Snowy for 500 snowflakes!").formatted(Formatting.DARK_GREEN), false);
+                removeSnowflakes(Objects.requireNonNull(context.getSource().getPlayer()), 500);
+            } catch (Exception e) {
+                LOGGER.atLevel(Level.ERROR).log("Shop crashed {}", e);
+                context.getSource().sendError(Text.literal(
+                        "Shop error when trying to purchase item 7: " + e
+                ));
+            }
+        } else {
+            context.getSource().sendFeedback(() -> Text.literal("You do not have enough Snowy to buy Snowballs for 500 snowflakes! (Snowflakes must be in your inventory to purchase)").formatted(Formatting.RED), false);
+        }
         return 1;
     }
 
