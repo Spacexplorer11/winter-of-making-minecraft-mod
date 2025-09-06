@@ -7,7 +7,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-import singh.akaalroop.winter_of_making.items.KnockbackSnowball;
 
 public class ModEntities {
     public static final RegistryKey<EntityType<?>> KNOCKBACK_SNOWBALL_KEY =

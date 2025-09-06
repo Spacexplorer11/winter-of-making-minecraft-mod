@@ -1,4 +1,4 @@
-package singh.akaalroop.winter_of_making.items;
+package singh.akaalroop.winter_of_making.entities;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
