@@ -8,6 +8,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import singh.akaalroop.winter_of_making.entities.ModEntities;
 import singh.akaalroop.winter_of_making.items.ModItems;
 import singh.akaalroop.winter_of_making.shop.ShopHandling;
 
@@ -27,6 +28,7 @@ public class WinterOfMaking implements ModInitializer {
 
         LOGGER.info("The winter is yours for the making");
         ModItems.initialise();
+        ModEntities.initialise();
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(CommandManager.literal("wom-shop")
                 .executes(context -> {
                     context.getSource().sendFeedback(() -> Text.literal("The available Winter of Making shop items are: \n").formatted(Formatting.AQUA)
