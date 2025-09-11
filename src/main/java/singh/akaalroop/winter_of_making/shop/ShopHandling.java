@@ -17,8 +17,10 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.biome.BiomeKeys;
 import org.slf4j.event.Level;
+import singh.akaalroop.winter_of_making.entities.KnockbackSnowball;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -228,6 +230,34 @@ public class ShopHandling {
     }
 
     static int snowBomb(CommandContext<ServerCommandSource> context, int snowflakes) {
+        if (snowflakes >= 1000) {
+            List<ServerPlayerEntity> players = context.getSource().getServer().getPlayerManager().getPlayerList();
+            ServerWorld world = context.getSource().getWorld();
+            for (ServerPlayerEntity player : players) {
+                for (int i = 0; i < 10; i++) {
+                    spawnKnockbackSnowball(player, world);
+                }
+            }
+            context.getSource().sendFeedback(() -> Text.literal("You successfully bought SNOW BOMB for 1000 snowflakes!").formatted(Formatting.DARK_GREEN), false);
+            removeSnowflakes(Objects.requireNonNull(context.getSource().getPlayer()), 1000);
+        } else {
+            context.getSource().sendFeedback(() -> Text.literal("You do not have enough snowflakes to buy SNOW BOMB for 1000 snowflakes! (Snowflakes must be in your inventory to purchase)").formatted(Formatting.RED), false);
+        }
         return 1;
+    }
+
+    static void spawnKnockbackSnowball(ServerPlayerEntity player, ServerWorld world) {
+        Vec3d lookVec = player.getRotationVec(1.0F).normalize();
+
+        Vec3d spawnPos = player.getPos().subtract(lookVec.multiply(2)).add(0, 1, 0);
+
+        KnockbackSnowball knockbackSnowball = new KnockbackSnowball(EntityType.SNOWBALL, world);
+        knockbackSnowball.setPosition(spawnPos.x, spawnPos.y, spawnPos.z);
+
+        Vec3d target = player.getPos().add(0, 1, 0);
+        Vec3d velocity = target.subtract(spawnPos).normalize().multiply(1.5);
+        knockbackSnowball.setVelocity(velocity.x, velocity.y, velocity.z);
+
+        world.spawnEntity(knockbackSnowball);
     }
 }

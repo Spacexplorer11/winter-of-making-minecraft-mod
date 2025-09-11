@@ -40,7 +40,7 @@ public class WinterOfMaking implements ModInitializer {
                             .append(Text.literal("5. Snowballs (Get given 2048 snowballs) - 200 snowflakes\n").formatted(Formatting.WHITE))
                             .append(Text.literal("6. Snow golem overlord (Spawn 25 snow golems at your position) - 300 snowflakes\n").formatted(Formatting.YELLOW))
                             .append(Text.literal("7. Snowy! (Change the weather to rainy + teleport you & up to 5 random players to the nearest snowy biome to you) - 500 snowflakes\n").formatted(Formatting.GREEN))
-                            .append(Text.literal("8. SNOW BOMB! (Spawn 10 snowballs 2 blocks above everyone's head!) - 1000 snowflakes!\n").formatted(Formatting.BOLD).formatted(Formatting.GOLD)), false);
+                            .append(Text.literal("8. SNOW BOMB! (Spawn 10 snowballs 2 blocks behind everyone's back flying towards them!) - 1000 snowflakes!\n").formatted(Formatting.BOLD).formatted(Formatting.GOLD)), false);
                     return 1;
                 })
                 .then(CommandManager.argument("shopItem", IntegerArgumentType.integer())
