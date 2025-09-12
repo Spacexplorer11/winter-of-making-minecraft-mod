@@ -9,13 +9,11 @@ import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.biome.BiomeKeys;
@@ -104,8 +102,12 @@ public class ShopHandling {
 
     static int snowBlock(CommandContext<ServerCommandSource> context, int snowflakes) {
         if (snowflakes >= 25) {
-            Objects.requireNonNull(context.getSource().getPlayer()).getInventory().insertStack(Registries.ITEM.get(Identifier.of("minecraft", "snow_block")).getDefaultStack());
-            Objects.requireNonNull(context.getSource().getPlayer()).getInventory().insertStack(Registries.ITEM.get(Identifier.of("minecraft", "iron_block")).getDefaultStack());
+            ItemStack snow_block = new ItemStack(Items.SNOW_BLOCK, 1);
+            ItemStack iron_block = new ItemStack(Items.IRON_BLOCK, 1);
+            Objects.requireNonNull(context.getSource().getPlayer()).getInventory().insertStack(snow_block);
+            Objects.requireNonNull(context.getSource().getPlayer()).getInventory().insertStack(iron_block);
+            Objects.requireNonNull(context.getSource().getPlayer()).dropItem(snow_block, false);
+            Objects.requireNonNull(context.getSource().getPlayer()).dropItem(iron_block, false);
             context.getSource().sendFeedback(() -> Text.literal("You successfully bought Snow Block for 25 snowflakes!").formatted(Formatting.DARK_GREEN), false);
             removeSnowflakes(context.getSource().getPlayer(), 25);
         } else {
