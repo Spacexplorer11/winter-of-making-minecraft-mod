@@ -3,14 +3,21 @@ package singh.akaalroop.winter_of_making;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.village.TradeOffer;
+import net.minecraft.village.TradedItem;
+import net.minecraft.village.VillagerProfession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import singh.akaalroop.winter_of_making.entities.ModEntities;
 import singh.akaalroop.winter_of_making.items.ModItems;
 import singh.akaalroop.winter_of_making.shop.ShopHandling;
+
 
 public class WinterOfMaking implements ModInitializer {
     public static final String MOD_ID = "winter-of-making";
@@ -45,5 +52,37 @@ public class WinterOfMaking implements ModInitializer {
                 })
                 .then(CommandManager.argument("shopItem", IntegerArgumentType.integer())
                         .executes(ShopHandling::buyShopItem))));
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.FISHERMAN, 1, factories -> factories.add((entity, random) -> new TradeOffer(
+                new TradedItem(Items.EMERALD, 10),
+                new ItemStack(ModItems.SNOWFLAKE, 16),
+                3,
+                5,
+                0.05f
+        )));
+
+        TradeOfferHelper.registerWanderingTraderOffers(builder -> {
+            // Add to the "common items" pool
+            builder.addOffersToPool(
+                    TradeOfferHelper.WanderingTraderOffersBuilder.SELL_COMMON_ITEMS_POOL,
+                    (entity, random) -> new TradeOffer(
+                            new TradedItem(Items.EMERALD, 9),
+                            new ItemStack(ModItems.SNOWFLAKE, 16),
+                            6,
+                            1,
+                            0.05f
+                    )
+            );
+
+            builder.addOffersToPool(
+                    TradeOfferHelper.WanderingTraderOffersBuilder.SELL_SPECIAL_ITEMS_POOL,
+                    (entity, random) -> new TradeOffer(
+                            new TradedItem(Items.EMERALD, 18),
+                            new ItemStack(ModItems.SNOWFLAKE, 32),
+                            1,
+                            5,
+                            0.1f
+                    )
+            );
+        });
     }
 }
