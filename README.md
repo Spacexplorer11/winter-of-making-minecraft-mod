@@ -1,3 +1,6 @@
+<p align="center">
+<img width="503" height="145" alt="winter-of-making-banner" src="https://github.com/user-attachments/assets/0ed7a4a4-57d7-41f8-b2e9-dff7cadbef6f" />
+</p>
 # Winter of Making!
 
 A ~~rip-off~~ economy mod based on [Hackclub's Summer of Making!](https://summer.hackclub.com) Ironically it was made
