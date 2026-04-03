@@ -188,6 +188,7 @@ public class ShopHandling {
     static int snowy(CommandContext<ServerCommandSource> context, int snowflakes) {
         if (snowflakes >= 500) {
             try {
+                context.getSource().sendFeedback(() -> Text.literal("Searching for nearby snow biome... (May take some time)").formatted(Formatting.GOLD), false);
                 List<ServerPlayerEntity> players = context.getSource().getServer().getPlayerManager().getPlayerList();
                 int limit = Math.min(players.size(), 5);
                 List<ServerPlayerEntity> playersToTeleport = new ArrayList<>(players.subList(0, limit));
