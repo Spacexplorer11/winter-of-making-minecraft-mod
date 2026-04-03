@@ -18,6 +18,10 @@ loom {
 
 }
 
+repositories {
+    maven { url = "https://maven.shedaniel.me" }
+}
+
 fabricApi {
     configureDataGeneration {
         client = true
@@ -33,6 +37,9 @@ dependencies {
 
     modImplementation "net.fabricmc:fabric-loader:${property('deps.fabric_loader')}"
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
+
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${property("deps.rei")}"
+    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${property("deps.rei")}"
 }
 
 

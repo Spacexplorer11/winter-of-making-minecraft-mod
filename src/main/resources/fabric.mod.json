@@ -8,7 +8,7 @@
     "Akaalroop Singh"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
+    "homepage": "https://modrinth.com/mod/winter-of-making",
     "sources": "https://github.com/Spacexplorer11/winter-of-making-minecraft-mod"
   },
   "license": "AGPL-3.0",
@@ -39,6 +39,6 @@
     "fabric-api": "*"
   },
   "suggests": {
-    "another-mod": "*"
+    "roughlyenoughitems": "*"
   }
 }
