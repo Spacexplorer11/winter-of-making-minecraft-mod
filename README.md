@@ -30,6 +30,7 @@ Anyways, I hope you like it!
 ### [Check out my wiki!](https://github.com/Spacexplorer11/winter-of-making-minecraft-mod/wiki)
 
 ### [Modrinth Download Link](https://modrinth.com/project/winter-of-making)
+![Modrinth Downloads](https://img.shields.io/modrinth/dt/KwPnMRIq?color=%23008000)
 
 ### [Github Releases](https://github.com/spacexplorer11/meow_meals/releases/latest)
 
