@@ -11,6 +11,7 @@ import net.minecraft.util.Identifier;
 public class ModEntities {
     public static final RegistryKey<EntityType<?>> KNOCKBACK_SNOWBALL_KEY =
             RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of("winter_of_making", "knockback_snowball"));
+    //? if >= 1.21 {
     public static final EntityType<KnockbackSnowball> KNOCKBACK_SNOWBALL =
             Registry.register(
                     Registries.ENTITY_TYPE,
@@ -19,6 +20,16 @@ public class ModEntities {
                             .dimensions(0.25F, 0.25F)
                             .build(KNOCKBACK_SNOWBALL_KEY)
             );
+    //? } else {
+    /*public static final EntityType<KnockbackSnowball> KNOCKBACK_SNOWBALL =
+            Registry.register(
+                    Registries.ENTITY_TYPE,
+                    KNOCKBACK_SNOWBALL_KEY,
+                    EntityType.Builder.create(KnockbackSnowball::new, SpawnGroup.MISC)
+                            .setDimensions(0.25F, 0.25F)
+                            .build(String.valueOf(KNOCKBACK_SNOWBALL_KEY))
+            );
+    *///? }
 
     public static void initialise() {
     }

@@ -10,7 +10,9 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.village.TradeOffer;
+//? if >=1.21 {
 import net.minecraft.village.TradedItem;
+//?}
 import net.minecraft.village.VillagerProfession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,21 +20,17 @@ import singh.akaalroop.winter_of_making.entities.ModEntities;
 import singh.akaalroop.winter_of_making.items.ModItems;
 import singh.akaalroop.winter_of_making.shop.ShopHandling;
 
+//? if <1.21
+//import static net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper.*;
+
 
 public class WinterOfMaking implements ModInitializer {
     public static final String MOD_ID = "winter-of-making";
 
-    // This logger is used to write text to the console and the log file.
-    // It is considered best practice to use your mod id as the logger's name.
-    // That way, it's clear which mod wrote info, warnings, and errors.
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override
     public void onInitialize() {
-        // This code runs as soon as Minecraft is in a mod-load-ready state.
-        // However, some things (like resources) may still be uninitialized.
-        // Proceed with mild caution.
-
         LOGGER.info("The winter is yours for the making");
         ModItems.initialise();
         ModEntities.initialise();
@@ -52,6 +50,8 @@ public class WinterOfMaking implements ModInitializer {
                 })
                 .then(CommandManager.argument("shopItem", IntegerArgumentType.integer())
                         .executes(ShopHandling::buyShopItem))));
+
+        //? if >=1.21 {
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FISHERMAN, 1, factories -> factories.add((entity, random) -> new TradeOffer(
                 new TradedItem(Items.EMERALD, 10),
                 new ItemStack(ModItems.SNOWFLAKE, 16),
@@ -59,9 +59,18 @@ public class WinterOfMaking implements ModInitializer {
                 5,
                 0.05f
         )));
+        //?} else {
+        /*registerVillagerOffers(VillagerProfession.FISHERMAN, 1, factories -> factories.add((entity, random) -> new TradeOffer(
+                new ItemStack(Items.EMERALD, 10),
+                new ItemStack(ModItems.SNOWFLAKE, 16),
+                3,
+                5,
+                0.05f
+        )));
+        *///?}
 
+        //? if >=1.21 {
         TradeOfferHelper.registerWanderingTraderOffers(builder -> {
-            // Add to the "common items" pool
             builder.addOffersToPool(
                     TradeOfferHelper.WanderingTraderOffersBuilder.SELL_COMMON_ITEMS_POOL,
                     (entity, random) -> new TradeOffer(
@@ -72,7 +81,6 @@ public class WinterOfMaking implements ModInitializer {
                             0.05f
                     )
             );
-
             builder.addOffersToPool(
                     TradeOfferHelper.WanderingTraderOffersBuilder.SELL_SPECIAL_ITEMS_POOL,
                     (entity, random) -> new TradeOffer(
@@ -84,5 +92,26 @@ public class WinterOfMaking implements ModInitializer {
                     )
             );
         });
+        //?} else {
+        /*TradeOfferHelper.registerWanderingTraderOffers(1, factories ->
+                factories.add((entity, random) -> new TradeOffer(
+                        new ItemStack(Items.EMERALD, 9),
+                        new ItemStack(ModItems.SNOWFLAKE, 16),
+                        6,
+                        1,
+                        0.05f
+                ))
+        );
+
+        TradeOfferHelper.registerWanderingTraderOffers(2, factories ->
+                factories.add((entity, random) -> new TradeOffer(
+                        new ItemStack(Items.EMERALD, 18),
+                        new ItemStack(ModItems.SNOWFLAKE, 32),
+                        1,
+                        5,
+                        0.1f
+                ))
+        );
+        *///?}
     }
 }

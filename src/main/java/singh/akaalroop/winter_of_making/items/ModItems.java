@@ -15,7 +15,11 @@ public class ModItems {
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
         RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(MOD_ID, name));
 
+        //? if >= 1.21 {
         Item item = itemFactory.apply(settings.registryKey(itemKey));
+        //? } else {
+        /*Item item = itemFactory.apply(settings.maxCount(64));
+         *///? }
 
         Registry.register(Registries.ITEM, itemKey, item);
 

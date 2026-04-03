@@ -23,7 +23,9 @@ import singh.akaalroop.winter_of_making.entities.KnockbackSnowball;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+//? if >= 1.21 {
 import java.util.Set;
+//? }
 
 import static singh.akaalroop.winter_of_making.WinterOfMaking.LOGGER;
 import static singh.akaalroop.winter_of_making.items.ModItems.SNOWFLAKE;
@@ -58,7 +60,7 @@ public class ShopHandling {
                 return snowBomb(context, snowflakes);
             }
             default -> {
-                context.getSource().sendFeedback(() -> Text.literal("The item you requested is not in the shop (please type /shop) then type the number of the item you want"), false);
+                context.getSource().sendFeedback(() -> Text.literal("The item you requested is not in the shop (please type /wom-shop) then type the number of the item you want"), false);
             }
         }
         return 1;
@@ -157,7 +159,13 @@ public class ShopHandling {
 
     static int snowGolemOverlord(CommandContext<ServerCommandSource> context, int snowflakes) {
         if (snowflakes >= 300) {
+            //? if >= 1.21.9 {
+            /*ServerWorld world = Objects.requireNonNull(context.getSource().getPlayer()).getEntityWorld();
+             *///? } else if <= 1.21.8 && >= 1.21 {
             ServerWorld world = Objects.requireNonNull(context.getSource().getPlayer()).getWorld();
+            //? } else {
+            /*ServerWorld world = (ServerWorld) Objects.requireNonNull(context.getSource().getPlayer()).getWorld();
+             *///? }
             for (int i = 0; i < 25; i++) {
                 SnowGolemEntity snowGolem = new SnowGolemEntity(EntityType.SNOW_GOLEM, world);
                 snowGolem.refreshPositionAndAngles(
@@ -205,6 +213,7 @@ public class ShopHandling {
 
                 world.setWeather(0, 3000, true, false);
 
+                //? if >= 1.21 {
                 for (ServerPlayerEntity player : playersToTeleport) {
                     player.teleport(world,
                             biomePos.getX() + 0.5,
@@ -216,6 +225,17 @@ public class ShopHandling {
                             false
                     );
                 }
+                //? } else {
+                /*for (ServerPlayerEntity player : playersToTeleport) {
+                    player.teleport(world,
+                            biomePos.getX() + 0.5,
+                            biomePos.getY() + 1.0,
+                            biomePos.getZ() + 0.5,
+                            player.getYaw(),
+                            player.getPitch()
+                    );
+                }
+                *///? }
 
                 context.getSource().sendFeedback(() -> Text.literal("You successfully bought Snowy for 500 snowflakes!").formatted(Formatting.DARK_GREEN), false);
                 removeSnowflakes(Objects.requireNonNull(context.getSource().getPlayer()), 500);
@@ -251,12 +271,19 @@ public class ShopHandling {
     static void spawnKnockbackSnowball(ServerPlayerEntity player, ServerWorld world) {
         Vec3d lookVec = player.getRotationVec(1.0F).normalize();
 
+        //? if >= 1.21.9 {
+        /*Vec3d spawnPos = player.getEntityPos().subtract(lookVec.multiply(2)).add(0, 1, 0);
+         *///? } else {
         Vec3d spawnPos = player.getPos().subtract(lookVec.multiply(2)).add(0, 1, 0);
-
+        //? }
         KnockbackSnowball knockbackSnowball = new KnockbackSnowball(EntityType.SNOWBALL, world);
         knockbackSnowball.setPosition(spawnPos.x, spawnPos.y, spawnPos.z);
 
+        //? if >= 1.21.9 {
+        /*Vec3d target = player.getEntityPos().add(0, 1, 0);
+         *///? } else {
         Vec3d target = player.getPos().add(0, 1, 0);
+        //? }
         Vec3d velocity = target.subtract(spawnPos).normalize().multiply(1.5);
         knockbackSnowball.setVelocity(velocity.x, velocity.y, velocity.z);
 
