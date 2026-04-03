@@ -1,7 +1,11 @@
 <p align="center">
 <img width="503" height="145" alt="winter-of-making-banner" src="https://github.com/user-attachments/assets/0ed7a4a4-57d7-41f8-b2e9-dff7cadbef6f" />
 </p>
+
 # Winter of Making!
+![GitHub last commit](https://img.shields.io/github/last-commit/spacexplorer11/winter-of-making-minecraft-mod?color=blue)    ![GitHub License](https://img.shields.io/github/license/spacexplorer11/winter-of-making-minecraft-mod?color=darkgreen)  ![Modrinth Game Versions](https://img.shields.io/modrinth/game-versions/KwPnMRIq?color=green)  ![Modrinth Followers](https://img.shields.io/modrinth/followers/KwPnMRIq)  ![Modrinth Version](https://img.shields.io/modrinth/v/KwPnMRIq?color=orange)
+
+[![Watch Demo](https://img.shields.io/badge/Watch-Demo-red?logo=youtube)](https://youtu.be/tMs_liePSew)
 
 A ~~rip-off~~ economy mod based on [Hackclub's Summer of Making!](https://summer.hackclub.com) Ironically it was made
 for [Summer of Making](https://summer.hackclub.com) and for [Hackcraft!](https://hackcraft.hackclub.com)  
@@ -21,11 +25,7 @@ Anyways, I hope you like it!
   </picture>
 </a>
 
-## Links & Badges
-
-![GitHub last commit](https://img.shields.io/github/last-commit/spacexplorer11/winter-of-making-minecraft-mod?color=blue)    ![GitHub License](https://img.shields.io/github/license/spacexplorer11/winter-of-making-minecraft-mod?color=darkgreen)  ![Modrinth Game Versions](https://img.shields.io/modrinth/game-versions/KwPnMRIq?color=green)  ![Modrinth Followers](https://img.shields.io/modrinth/followers/KwPnMRIq)  ![Modrinth Version](https://img.shields.io/modrinth/v/KwPnMRIq?color=orange)
-
-[![Watch Demo](https://img.shields.io/badge/Watch-Demo-red?logo=youtube)](https://youtu.be/tMs_liePSew)
+## Useful Links
 
 ### [Check out my wiki!](https://github.com/Spacexplorer11/winter-of-making-minecraft-mod/wiki)
 
