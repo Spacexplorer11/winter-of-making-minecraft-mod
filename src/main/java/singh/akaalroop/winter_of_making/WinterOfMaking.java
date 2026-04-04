@@ -20,6 +20,10 @@ import singh.akaalroop.winter_of_making.entities.ModEntities;
 import singh.akaalroop.winter_of_making.items.ModItems;
 import singh.akaalroop.winter_of_making.shop.ShopHandling;
 
+//? if = 1.21.11 {
+/*import java.util.List;
+ *///? }
+
 //? if <1.21
 //import static net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper.*;
 
@@ -51,7 +55,15 @@ public class WinterOfMaking implements ModInitializer {
                 .then(CommandManager.argument("shopItem", IntegerArgumentType.integer())
                         .executes(ShopHandling::buyShopItem))));
 
-        //? if >=1.21 {
+        //? if = 1.21.11 {
+        /*TradeOfferHelper.registerVillagerOffers(VillagerProfession.FISHERMAN, 1, factories -> factories.add(( world, entity, random) -> new TradeOffer(
+                new TradedItem(Items.EMERALD, 10),
+                new ItemStack(ModItems.SNOWFLAKE, 16),
+                3,
+                5,
+                0.05f
+        )));
+        *///? } else if >=1.21 && <= 1.21.10 {
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FISHERMAN, 1, factories -> factories.add((entity, random) -> new TradeOffer(
                 new TradedItem(Items.EMERALD, 10),
                 new ItemStack(ModItems.SNOWFLAKE, 16),
@@ -69,7 +81,30 @@ public class WinterOfMaking implements ModInitializer {
         )));
         *///?}
 
-        //? if >=1.21 {
+        //? if = 1.21.11 {
+        /*TradeOfferHelper.registerWanderingTraderOffers(builder -> {
+            builder.addOffersToPool(
+                    TradeOfferHelper.WanderingTraderOffersBuilder.SELL_COMMON_ITEMS_POOL,
+                    List.of((world, entity, random) -> new TradeOffer(
+                            new TradedItem(Items.EMERALD, 9),
+                            new ItemStack(ModItems.SNOWFLAKE, 16),
+                            6,
+                            1,
+                            0.05f
+                    )
+            ));
+            builder.addOffersToPool(
+                    TradeOfferHelper.WanderingTraderOffersBuilder.SELL_SPECIAL_ITEMS_POOL,
+                    List.of((world,entity, random) -> new TradeOffer(
+                            new TradedItem(Items.EMERALD, 18),
+                            new ItemStack(ModItems.SNOWFLAKE, 32),
+                            1,
+                            5,
+                            0.1f
+                    )
+            ));
+        });
+        *///? } else if >=1.21 && <=1.21.10 {
         TradeOfferHelper.registerWanderingTraderOffers(builder -> {
             builder.addOffersToPool(
                     TradeOfferHelper.WanderingTraderOffersBuilder.SELL_COMMON_ITEMS_POOL,
