@@ -1,14 +1,19 @@
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        mavenCentral()
+        maven {
+            name = "MavenCentral"
+            url = uri("http://raspberrypi.local:8080/Maven-Central")
+            allowInsecureProtocol = true
+        }
         maven {
             url = "https://maven.kikugie.dev/snapshots"
             name = "KikuGie Snapshots"
         }
         maven {
             name = 'Fabric'
-            url = 'https://maven.fabricmc.net/'
+            url = uri("http://raspberrypi.local:8080/Fabric")
+            allowInsecureProtocol = true
         }
     }
 }
@@ -23,7 +28,7 @@ stonecutter {
 
     // Configuration goes here
     create(getRootProject()) {
-        versions "1.20.1", "1.21.5", "1.21.6", "1.21.7", "1.21.8", "1.21.9", "1.21.10", "1.21.11"
+        versions "1.20.1", "1.21.4", "1.21.5", "1.21.6", "1.21.7", "1.21.8", "1.21.9", "1.21.10", "1.21.11"
         vcsVersion = "1.21.8"
     }
 }

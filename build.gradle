@@ -20,7 +20,10 @@ loom {
 }
 
 repositories {
-    maven { url = "https://maven.shedaniel.me" }
+    maven {
+        url = "http://raspberrypi.local:8080/REI"
+        allowInsecureProtocol = true
+    }
 }
 
 fabricApi {

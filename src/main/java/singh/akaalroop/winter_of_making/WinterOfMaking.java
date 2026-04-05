@@ -104,7 +104,7 @@ public class WinterOfMaking implements ModInitializer {
                     )
             ));
         });
-        *///? } else if >=1.21 && <=1.21.10 {
+        *///? } else if >=1.21.5 && <=1.21.10 {
         TradeOfferHelper.registerWanderingTraderOffers(builder -> {
             builder.addOffersToPool(
                     TradeOfferHelper.WanderingTraderOffersBuilder.SELL_COMMON_ITEMS_POOL,
@@ -127,7 +127,27 @@ public class WinterOfMaking implements ModInitializer {
                     )
             );
         });
-        //?} else {
+        //?} else if <= 1.21.4 && >=1.21 {
+        /*TradeOfferHelper.registerWanderingTraderOffers(1, factories ->
+                factories.add((entity, random) -> new TradeOffer(
+                        new TradedItem(Items.EMERALD, 9),
+                        new ItemStack(ModItems.SNOWFLAKE, 16),
+                        6,
+                        1,
+                        0.05f
+                ))
+        );
+
+        TradeOfferHelper.registerWanderingTraderOffers(2, factories ->
+                factories.add((entity, random) -> new TradeOffer(
+                        new TradedItem(Items.EMERALD, 18),
+                        new ItemStack(ModItems.SNOWFLAKE, 32),
+                        1,
+                        5,
+                        0.1f
+                ))
+        );
+        *///? } else {
         /*TradeOfferHelper.registerWanderingTraderOffers(1, factories ->
                 factories.add((entity, random) -> new TradeOffer(
                         new ItemStack(Items.EMERALD, 9),
