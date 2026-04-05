@@ -2,8 +2,9 @@ plugins {
     id 'fabric-loom' version '1.15-SNAPSHOT'
 }
 
+def mcVersion = sc.current.version
 // These lines make the mod filename `{mod.id}-${mod.version}+${sc.current.version}.jar`
-version = "${property('mod.version')}+${sc.current.version}"
+version = "${property('mod.version')}+${mcVersion}"
 base.archivesName = property('mod.id') as String
 
 loom {
@@ -32,7 +33,7 @@ fabricApi {
 def requiredJava = JavaVersion.VERSION_21
 
 dependencies {
-    minecraft "com.mojang:minecraft:${sc.current.version}"
+    minecraft "com.mojang:minecraft:${mcVersion}"
     mappings "net.fabricmc:yarn:${property('deps.yarn_mappings')}:v2"
 
     modImplementation "net.fabricmc:fabric-loader:${property('deps.fabric_loader')}"
@@ -50,11 +51,11 @@ java {
 }
 
 processResources {
-    inputs.property("minecraft_version", sc.current.version)
+    inputs.property("minecraft_version", mcVersion)
     inputs.property("version", version)
     filesMatching("fabric.mod.json") {
         expand([
-                "minecraft_version": sc.current.version,
+                "minecraft_version": mcVersion,
                 "version"          : version
         ])
     }

@@ -161,7 +161,7 @@ public class ShopHandling {
         if (snowflakes >= 300) {
             //? if >= 1.21.9 {
             /*ServerWorld world = Objects.requireNonNull(context.getSource().getPlayer()).getEntityWorld();
-             *///? } else if <= 1.21.8 && >= 1.21 {
+             *///? } else if <= 1.21.8 && >= 1.21.6 {
             ServerWorld world = Objects.requireNonNull(context.getSource().getPlayer()).getWorld();
             //? } else {
             /*ServerWorld world = (ServerWorld) Objects.requireNonNull(context.getSource().getPlayer()).getWorld();
