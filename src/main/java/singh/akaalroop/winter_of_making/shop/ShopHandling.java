@@ -23,12 +23,12 @@ import singh.akaalroop.winter_of_making.entities.KnockbackSnowball;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-//? if >= 1.21 {
-import java.util.Set;
-//? }
 
 import static singh.akaalroop.winter_of_making.WinterOfMaking.LOGGER;
 import static singh.akaalroop.winter_of_making.items.ModItems.SNOWFLAKE;
+
+//? if >= 1.21 {
+//? }
 
 public class ShopHandling {
     public static int buyShopItem(CommandContext<ServerCommandSource> context) {
@@ -214,7 +214,7 @@ public class ShopHandling {
 
                 world.setWeather(0, 3000, true, false);
 
-                //? if >= 1.21 {
+                //? if >= 1.21.2 {
                 for (ServerPlayerEntity player : playersToTeleport) {
                     player.teleport(world,
                             biomePos.getX() + 0.5,

@@ -21,8 +21,23 @@ loom {
 
 repositories {
     maven {
+        name = "piFabric"
+        url = "http://raspberrypi.local:8080/Fabric"
+        allowInsecureProtocol = true
+    }
+    maven {
+        name = "piMavenCentral"
+        url = "http://raspberrypi.local:8080/Maven-Central"
+        allowInsecureProtocol = true
+    }
+    maven {
+        name = "piREI"
         url = "http://raspberrypi.local:8080/REI"
         allowInsecureProtocol = true
+    }
+    maven {
+        name = "MojangLibraries"
+        url = "https://libraries.minecraft.net"
     }
 }
 
