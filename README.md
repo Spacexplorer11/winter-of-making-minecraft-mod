@@ -12,7 +12,7 @@ for [Summer of Making](https://summer.hackclub.com) and for [Hackcraft!](https:/
 Instead of shells, it uses snowflakes as the currency. It also has a small shop with 8[^1] unique items!  
 You can earn snowflakes from trading or crafting! ... I don't know if earn is the right word anymore.  
 I dunno what more to say, it's simple but hopefully appreciated <3!  
-Anyways, I hope you like it!
+Anyway, I hope you like it!
 
 ## The snowflake
 
@@ -39,6 +39,14 @@ Anyways, I hope you like it!
 ![Hackatime Badge](https://hackatime-badge.hackclub.com/U08D22QNUVD/winter-of-making)
 
 ---
+Still reading?  
+This was the first ever mod I made using [Stonecutter](https://stonecutter.kikugie.dev)
+and [Linkie](https://linkie.shedaniel.dev) was super helpful for the dependencies.  
+It was really, really hard and complicated for me to set up, but only because I tried setting up 26.1 (unobfuscated)
+and <=1.21.11 (obfuscated) versions together, and they just didn't work.  
+After a few hours of tinkering, I figured it out, and stonecutter is actually really easy to use!  
+The only thing I don't like is how SLOW Gradle with big projects. But that's just how it is. I tried everything for
+optimisation, but there's only so much a guy can do.
 
 ![Made with love](https://img.shields.io/badge/Made_with-❤️-red)  
 [^1]: It's actually technically 7 since Snow King & Snow Queen are extremely similar
