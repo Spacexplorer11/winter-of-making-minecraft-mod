@@ -23,11 +23,12 @@ import singh.akaalroop.winter_of_making.entities.KnockbackSnowball;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import static singh.akaalroop.winter_of_making.WinterOfMaking.LOGGER;
 import static singh.akaalroop.winter_of_making.items.ModItems.SNOWFLAKE;
 
-//? if >= 1.21 {
+//? if >= 1.21.2 {
 //? }
 
 public class ShopHandling {
