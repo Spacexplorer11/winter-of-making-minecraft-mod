@@ -38,6 +38,12 @@ repositories {
             url = "http://raspberrypi.local:8080/REI"
             allowInsecureProtocol = true
         }
+    } else {
+        mavenCentral()
+        maven {
+            name = "Fabric"
+            url = uri("https://maven.fabricmc.net")
+        }
     }
     maven {
         name = "MojangLibraries"

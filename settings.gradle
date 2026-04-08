@@ -18,6 +18,12 @@ pluginManagement {
                 url = uri("http://raspberrypi.local:8080/REI")
                 allowInsecureProtocol = true
             }
+        } else {
+            mavenCentral()
+            maven {
+                name = "Fabric"
+                url = uri("https://maven.fabricmc.net")
+            }
         }
         maven {
             url = "https://maven.kikugie.dev/snapshots"
@@ -35,22 +41,35 @@ dependencyResolutionManagement {
     repositories {
         if (!isCI) {
             maven {
-                name = "piMavenCentral"
-                url = uri("http://raspberrypi.local:8080/Maven-Central")
-                allowInsecureProtocol = true
-            }
-            maven {
                 name = "piFabric"
                 url = uri("http://raspberrypi.local:8080/Fabric")
                 allowInsecureProtocol = true
+                content {
+                    includeGroupByRegex "net\\.fabricmc.*"
+                }
             }
             maven {
                 name = "piREI"
                 url = uri("http://raspberrypi.local:8080/REI")
                 allowInsecureProtocol = true
+                content {
+                    includeGroupByRegex "me\\.shedaniel.*"
+                    includeGroupByRegex "dev\\.architectury.*"
+                }
             }
         }
+        mavenCentral()
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        maven { url = "https://maven.shedaniel.me" }
+        maven {
+            name = "MojangLibraries"
+            url = "https://libraries.minecraft.net"
+        }
     }
+    repositoriesMode = RepositoriesMode.PREFER_SETTINGS
 }
 
 stonecutter {
@@ -59,7 +78,7 @@ stonecutter {
 
     // Configuration goes here
     create(getRootProject()) {
-        versions "1.20", "1.20.1", "1.21", "1.21.1", "1.21.2", "1.21.3", "1.21.4", "1.21.5", "1.21.6", "1.21.7", "1.21.8", "1.21.9", "1.21.10", "1.21.11"
+        versions "1.20", "1.20.1", "1.20.4", "1.21", "1.21.1", "1.21.2", "1.21.3", "1.21.4", "1.21.5", "1.21.6", "1.21.7", "1.21.8", "1.21.9", "1.21.10", "1.21.11"
         vcsVersion = "1.21.8"
     }
 }
