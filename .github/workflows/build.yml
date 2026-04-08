@@ -21,29 +21,8 @@ jobs:
           distribution: 'microsoft'
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
-      - name: Build (CI repos only)
-        run: |
-          cat > ci.init.gradle <<'EOF'
-          allprojects {
-            repositories {
-              mavenCentral()
-              maven { url = uri("https://maven.fabricmc.net/") }
-              maven { url = uri("https://maven.shedaniel.me/") }
-            }
-          }
-          settingsEvaluated { settings ->
-            settings.pluginManagement {
-              repositories {
-                gradlePluginPortal()
-                mavenCentral()
-                maven { url = uri("https://maven.fabricmc.net/") }
-                maven { url = uri("https://maven.kikugie.dev/snapshots") }
-              }
-            }
-          }
-          EOF
-
-          ./gradlew -I ci.init.gradle build --no-daemon --stacktrace
+      - name: build
+        run: ./gradlew build
       - name: capture build artifacts
         uses: actions/upload-artifact@v4
         with:
