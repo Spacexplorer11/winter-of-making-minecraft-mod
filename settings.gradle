@@ -39,6 +39,15 @@ plugins {
 dependencyResolutionManagement {
     def isCI = System.getenv("CI") != null
     repositories {
+        maven {
+            name = "Mojang"
+            url = "https://libraries.minecraft.net"
+            content {
+                includeGroup "org.lwjgl"
+                includeGroup "net.minecraft"
+                includeGroup "com.mojang"
+            }
+        }
         if (!isCI) {
             maven {
                 name = "piFabric"
@@ -57,16 +66,26 @@ dependencyResolutionManagement {
                     includeGroupByRegex "dev\\.architectury.*"
                 }
             }
+            maven {
+                name = "piMavenCentral"
+                url = uri("http://raspberrypi.local:8080/Maven-Central")
+                allowInsecureProtocol = true
+            }
         }
-        mavenCentral()
         maven {
             name = 'Fabric'
             url = 'https://maven.fabricmc.net/'
         }
         maven { url = "https://maven.shedaniel.me" }
+        mavenCentral()
+
         maven {
-            name = "MojangLibraries"
-            url = "https://libraries.minecraft.net"
+            name = "LoomRemappedMods"
+            url = uri(".gradle/loom-cache/remapped_mods")
+        }
+        maven {
+            name = "LoomMinecraftStuff"
+            url = uri(".gradle/loom-cache/minecraftMaven")
         }
     }
     repositoriesMode = RepositoriesMode.PREFER_SETTINGS

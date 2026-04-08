@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.15-SNAPSHOT'
+    id 'net.fabricmc.fabric-loom-remap' version '1.15-SNAPSHOT'
 }
 
 def mcVersion = sc.current.version
@@ -17,38 +17,6 @@ loom {
         }
     }
 
-}
-
-def isCI = System.getenv("CI") != null
-
-repositories {
-    if (!isCI) {
-        maven {
-            name = "piFabric"
-            url = "http://raspberrypi.local:8080/Fabric"
-            allowInsecureProtocol = true
-        }
-        maven {
-            name = "piMavenCentral"
-            url = "http://raspberrypi.local:8080/Maven-Central"
-            allowInsecureProtocol = true
-        }
-        maven {
-            name = "piREI"
-            url = "http://raspberrypi.local:8080/REI"
-            allowInsecureProtocol = true
-        }
-    } else {
-        mavenCentral()
-        maven {
-            name = "Fabric"
-            url = uri("https://maven.fabricmc.net")
-        }
-    }
-    maven {
-        name = "MojangLibraries"
-        url = "https://libraries.minecraft.net"
-    }
 }
 
 fabricApi {
