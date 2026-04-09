@@ -82,10 +82,16 @@ dependencyResolutionManagement {
         maven {
             name = "LoomRemappedMods"
             url = uri(".gradle/loom-cache/remapped_mods")
+            content {
+                includeGroupByRegex "remapped.*"
+            }
         }
         maven {
             name = "LoomMinecraftStuff"
             url = uri(".gradle/loom-cache/minecraftMaven")
+            content {
+                includeGroupByRegex "net.minecraft.*"
+            }
         }
     }
     repositoriesMode = RepositoriesMode.PREFER_SETTINGS
@@ -97,7 +103,7 @@ stonecutter {
 
     // Configuration goes here
     create(getRootProject()) {
-        versions "1.20", "1.20.1", "1.20.4", "1.21", "1.21.1", "1.21.2", "1.21.3", "1.21.4", "1.21.5", "1.21.6", "1.21.7", "1.21.8", "1.21.9", "1.21.10", "1.21.11"
+        versions "1.20", "1.20.1", "1.20.2", "1.20.3", "1.20.4", "1.21", "1.21.1", "1.21.2", "1.21.3", "1.21.4", "1.21.5", "1.21.6", "1.21.7", "1.21.8", "1.21.9", "1.21.10", "1.21.11"
         vcsVersion = "1.21.8"
     }
 }
