@@ -5,7 +5,7 @@
 # Winter of Making!
 ![GitHub last commit](https://img.shields.io/github/last-commit/spacexplorer11/winter-of-making-minecraft-mod?color=blue)    ![GitHub License](https://img.shields.io/github/license/spacexplorer11/winter-of-making-minecraft-mod?color=darkgreen)  ![Modrinth Game Versions](https://img.shields.io/modrinth/game-versions/KwPnMRIq?color=green)  ![Modrinth Followers](https://img.shields.io/modrinth/followers/KwPnMRIq)  ![Modrinth Version](https://img.shields.io/modrinth/v/KwPnMRIq?color=orange)
 
-[![Watch Demo](https://img.shields.io/badge/Watch-Demo-red?logo=youtube)](https://youtu.be/tMs_liePSew)
+[Click here to watch demo](https://youtu.be/tMs_liePSew)
 
 A ~~rip-off~~ economy mod based on [Hackclub's Summer of Making!](https://summer.hackclub.com) Ironically it was made
 for [Summer of Making](https://summer.hackclub.com) and for [Hackcraft!](https://hackcraft.hackclub.com)  
@@ -32,7 +32,7 @@ Anyway, I hope you like it!
 ### [Modrinth Download Link](https://modrinth.com/project/winter-of-making)
 ![Modrinth Downloads](https://img.shields.io/modrinth/dt/KwPnMRIq?color=%23008000)
 
-### [Github Releases](https://github.com/spacexplorer11/meow_meals/releases/latest)
+### [Github Releases](https://github.com/spacexplorer11/winter-of-making-minecraft-mod/releases/latest)
 
 ### Time Spent
 
